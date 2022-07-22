@@ -4,10 +4,15 @@
     state: "latest"
    #update_cache: true
 
+name: "Delete /var/www/test folder"
+    ansible.builtin.file:
+      path: "/var/www/test"
+      state: "absent"
+
 - name: "Copy HTML test page to /var/www/test"
   ansible.builtin.copy:
-    src: "files/test.html"
-    dest: "/var/www/test/"
+    src: "files/test"
+    dest: "/var/www/"
     owner: "root"
     group: "root"
     mode: "0644"
