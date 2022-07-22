@@ -4,7 +4,7 @@
     state: "latest"
    #update_cache: true
 
-name: "Delete /var/www/test folder"
+- name: "Delete /var/www/test folder"
     ansible.builtin.file:
       path: "/var/www/test"
       state: "absent"
