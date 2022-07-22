@@ -1,0 +1,29 @@
+#Установка NGINX
+---
+- hosts: "all"
+  become: true
+  roles:
+    - nginx
+  tasks:
+  - name: "Reload nginx"
+    ansible.builtin.service:
+      name: "nginx"
+      state: "reloaded"
+
+  - name: "Check if NGINX is installed"
+    package_facts:
+      manager: "auto"
+
+  - name: "Confirm NGINX is installed"
+    assert:
+      that: "'nginx' in ansible_facts.packages"
+
+  - name: "Check if port 8085 is listening"
+    shell: lsof -i -P -n | grep LISTEN
+    register: port_check
+
+  - name: "Confirm port 8085 is listening"
+    assert:
+      that: "'*:8085 (LISTEN)' in port_check.stdout"
+
+...

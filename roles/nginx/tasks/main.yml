@@ -1,0 +1,21 @@
+- name: "Install nginx"
+  ansible.builtin.apt:
+    name: "nginx"
+    state: "latest"
+   #update_cache: true
+
+- name: "Copy HTML test page to /var/www/test"
+  ansible.builtin.copy:
+    src: "files/test.html"
+    dest: "/var/www/test/"
+    owner: "root"
+    group: "root"
+    mode: "0644"
+
+- name: "Copy NGINX conf file to /etc/nginx/conf.d"
+  ansible.builtin.copy:
+    src: "files/test.conf"
+    dest: "/etc/nginx/conf.d/"
+    owner: "root"
+    group: "root"
+    mode: "0644"
